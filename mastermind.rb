@@ -3,7 +3,7 @@ class Mastermind
 
   def initialize
     @user_guess = []
-    @winning_combo = ''
+    @winning_combo = nil
     @color_options = "|red|green|yellow|blue|orange|purple|black|white|"
     @turn_count = 0
   end
@@ -46,9 +46,10 @@ class Mastermind
   end
 
   def get_answer
+    @user_guess = []
     for i in 1..4
       print "#{i}:"
-      input = gets.chomp.downcase
+      input = gets.chomp.downcase.strip
       @user_guess << input
     end
     puts ""
@@ -59,7 +60,6 @@ class Mastermind
     @user_guess.each_with_index do |input, i|
       display_board = display_board.gsub((i + 1).to_s, input[0..2])
     end
-    @user_guess = []
     puts display_board + " Round: #{@turn_count}"
     puts ""
   end
