@@ -1,9 +1,9 @@
 class Mastermind
 
+
   def initialize
     @user_guess = []
-    @winning_combo = []
-    @display_board = "|_1_|_2_|_3_|_4_|"
+    @winning_combo = ''
     @color_options = "|red|green|yellow|blue|orange|purple|black|white|"
     @turn_count = 0
   end
@@ -22,6 +22,7 @@ class Mastermind
   end
 
   def title_sequence
+    puts ""
     puts "MASTERMIND"
     puts ""
     puts "|_?_|_?_|_?_|_?_|"
@@ -33,7 +34,7 @@ class Mastermind
   end
 
   def color_array_display
-    if @turn_count % 3 == 0 && @turn_count >= 2
+    if @turn_count % 3 == 0 && @turn_count > 1
       puts @color_options
       puts ""
     end
@@ -48,16 +49,18 @@ class Mastermind
     for i in 1..4
       print "#{i}:"
       input = gets.chomp.downcase
-      @user_guess << [input, i]
+      @user_guess << input
     end
     puts ""
   end
 
   def display_answer
-    @user_guess.each do |input, i|
-      @display_board = @display_board.gsub(i.to_s, input[0..2])
+    display_board = "|_1_|_2_|_3_|_4_|"
+    @user_guess.each_with_index do |input, i|
+      display_board = display_board.gsub((i + 1).to_s, input[0..2])
     end
-    puts @display_board
+    @user_guess = []
+    puts display_board + " Round: #{@turn_count}"
     puts ""
   end
 
