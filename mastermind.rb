@@ -53,8 +53,12 @@ class Mastermind
     for i in 1..4
       print "#{i}:"
       input = gets.chomp.downcase.strip
-      until @color_choices.include? input
-        puts "Must include a color from the array!"
+      until @color_choices.include? input && @user_guess.exclude? input
+        if @user_guess.include? input
+          puts "That color is already in use!"
+        else
+          puts "Must include a color from the array!"
+        end
         print "#{i}:"
         input = gets.chomp.downcase.strip
       end
