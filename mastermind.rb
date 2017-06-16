@@ -53,7 +53,7 @@ class Mastermind
     for i in 1..4
       print "#{i}:"
       input = gets.chomp.downcase.strip
-      until @color_choices.include? input && @user_guess.exclude? input
+      until @color_choices.include?(input) && !@user_guess.include?(input)
         if @user_guess.include? input
           puts "That color is already in use!"
         else
