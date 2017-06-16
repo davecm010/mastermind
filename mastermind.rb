@@ -4,7 +4,8 @@ class Mastermind
   def initialize
     @user_guess = []
     @winning_combo = nil
-    @color_options = "|red|green|yellow|blue|orange|purple|black|white|"
+    @color_array = "|red|green|yellow|blue|orange|purple|black|white|"
+    @color_choices = ['red', 'green', 'yellow', 'blue', 'orange', 'purple', 'black', 'white']
     @turn_count = 0
     @hints = nil
   end
@@ -32,20 +33,19 @@ class Mastermind
     puts ""
     puts "Enter in 4 of the following colors in any order:"
     puts ""
-    puts @color_options
+    puts @color_array
     puts ""
   end
 
   def color_array_display
     if @turn_count % 3 == 0 && @turn_count > 1
-      puts @color_options
+      puts @color_array
       puts ""
     end
   end
 
   def combo_randomizer
-    color_choices = ['red', 'green', 'yellow', 'blue', 'orange', 'purple', 'black', 'white']
-    @winning_combo = color_choices.sample(4)
+    @winning_combo = @color_choices.sample(4)
   end
 
   def get_answer
@@ -53,6 +53,11 @@ class Mastermind
     for i in 1..4
       print "#{i}:"
       input = gets.chomp.downcase.strip
+      until @color_choices.include? input
+        puts "must include a color from the array!"
+        print "#{i}:"
+        input = gets.chomp.downcase.strip
+      end
       @user_guess << input
     end
     puts ""
@@ -110,3 +115,4 @@ end
 
 mastermind = Mastermind.new
 mastermind.new_game
+
