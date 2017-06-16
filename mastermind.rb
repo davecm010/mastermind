@@ -54,7 +54,7 @@ class Mastermind
       print "#{i}:"
       input = gets.chomp.downcase.strip
       until @color_choices.include? input
-        puts "Must include a color from the array!
+        puts "Must include a color from the array!"
         print "#{i}:"
         input = gets.chomp.downcase.strip
       end
