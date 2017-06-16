@@ -6,6 +6,7 @@ class Mastermind
     @winning_combo = nil
     @color_options = "|red|green|yellow|blue|orange|purple|black|white|"
     @turn_count = 0
+    @hints = nil
   end
 
   def new_game
@@ -16,7 +17,9 @@ class Mastermind
       @turn_count += 1
       get_answer
       display_answer
-      end_round_hint
+      end_round
+      show_hints
+      game_over?
       color_array_display
     end
   end
@@ -64,12 +67,44 @@ class Mastermind
     puts ""
   end
 
-  def end_round_hint
-    2.times do
-      puts "|_|_|"
+  def end_round
+    @hints = []
+    @user_guess.each_with_index do |color, i|
+      if @winning_combo[i] == color
+        @hints.unshift("[x]")
+      elsif @winning_combo.include? color 
+        @hints << "[o]"
+      end
     end
-    puts ""
   end
+  
+  def show_hints
+    if @hints.empty?
+      2.times do
+        puts "[ ][ ]"
+      end
+    else
+      i = 0 
+      2.times do 
+        for x in i..i+1
+          print @hints[x]
+        end
+        i += 2
+        puts""
+      end
+    end
+    puts ''
+  end
+  
+  def game_over?
+    if @user_guess == @winning_combo
+      puts "You figured out the secret code, you win!"
+      exit
+    elsif @turn_count >= 12
+      puts "You have run out of guesses, GAME OVER..."
+      exit
+    end
+  end 
 
 end
 
