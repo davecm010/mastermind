@@ -165,7 +165,7 @@ class Mastermind
 
   def user_game_over?
     if @user_guess == @winning_combo
-      puts "You figured out the secret code, you win!"
+      puts "You figured out the secret code, YOU WIN!"
       exit
     elsif @turn_count >= 12
       puts "You have run out of guesses, GAME OVER..."
@@ -175,7 +175,7 @@ class Mastermind
 
   def computer_game_over?
     if @user_guess == @winning_combo
-      puts "the computer figured out the secret code, GAME OVER..."
+      puts "The computer figured out your secret code, GAME OVER..."
       exit
     elsif @turn_count >= 12
       puts "The computer ran out of guesses, YOU WIN!"
